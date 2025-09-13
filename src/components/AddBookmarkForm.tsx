@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Bookmark, Category } from '../types';
 import { X, Plus, Link, Tag, Star } from 'lucide-react';
 
@@ -20,6 +20,19 @@ export const AddBookmarkForm = ({ isOpen, onClose, onAdd, categories, editingBoo
     favorite: editingBookmark?.favorite || false,
   });
   const [newTag, setNewTag] = useState('');
+
+  useEffect(() => {
+    if (isOpen) {
+      setFormData({
+        title: editingBookmark?.title || '',
+        url: editingBookmark?.url || '',
+        description: editingBookmark?.description || '',
+        category: editingBookmark?.category || categories[0]?.id || '',
+        tags: editingBookmark?.tags || [],
+        favorite: editingBookmark?.favorite || false,
+      });
+    }
+  }, [isOpen, editingBookmark, categories]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
