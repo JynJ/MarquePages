@@ -13,7 +13,7 @@ export const StatsPanel = ({ bookmarks, categories }: StatsPanelProps) => {
   
   const categoryStats = categories.map(category => ({
     ...category,
-    count: bookmarks.filter(b => b.category === category.id).count
+    count: bookmarks.filter(b => b.category === category.id).length,
   }));
 
   const recentBookmarks = bookmarks
